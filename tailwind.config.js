@@ -6,4 +6,11 @@ module.exports = {
   ],
   darkMode: 'class', // or 'media' or 'class'
   presets: [require('./utils/tailwind-preset')],
+  theme: {
+    extend: {
+      fontFamily: {
+        math: ['"Computer Modern Serif"', 'serif'],
+      },
+    },
+  },
 };
