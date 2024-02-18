@@ -1,9 +1,10 @@
 import { MDXRemote } from 'next-mdx-remote';
 import Header from './Header';
-import Layout from './Layout';
+import Layout, { GradientBackground } from './Layout';
 import SEO from './SEO';
 import CustomLink from './CustomLink';
 import Head from 'next/head';
+import Footer from './Footer';
 
 const components = {
   a: CustomLink,
@@ -30,6 +31,15 @@ export default function PageLayout({ source, frontMatter, globalData }) {
           </article>
         </main>
       </article>
+      <Footer copyrightText={globalData.footerText} />
+      <GradientBackground
+        variant="large"
+        className="absolute -top-32 opacity-30 dark:opacity-50"
+      />
+      <GradientBackground
+        variant="small"
+        className="absolute bottom-0 opacity-20 dark:opacity-10"
+      />
     </Layout>
   );
 }
