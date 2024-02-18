@@ -9,6 +9,7 @@ import rehypeKatex from 'rehype-katex';
 
 // POSTS_PATH is useful when you want to get the path to a specific file
 export const POSTS_PATH = path.join(process.cwd(), 'posts');
+export const PAGES_PATH = path.join(process.cwd(), 'pages');
 
 // postFilePaths is the list of all mdx files inside the POSTS_PATH directory
 export const postFilePaths = fs
@@ -57,6 +58,21 @@ export const getPostBySlug = async (slug) => {
   });
 
   return { mdxSource, data, postFilePath };
+};
+
+export const getPageFile = async (page) => {
+  const pageFilePath = path.join(PAGES_PATH, `${page}.mdx`);
+  const source = fs.readFileSync(pageFilePath);
+  console.log('the source is', source);
+  const { content, data } = matter(source);
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm, remarkMath],
+      rehypePlugins: [rehypePrism, rehypeKatex],
+    },
+    scope: data,
+  });
+  return { mdxSource, data, pageFilePath };
 };
 
 export const getNextPostBySlug = (slug) => {
