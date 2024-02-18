@@ -63,7 +63,6 @@ export const getPostBySlug = async (slug) => {
 export const getPageFile = async (page) => {
   const pageFilePath = path.join(PAGES_PATH, `${page}.mdx`);
   const source = fs.readFileSync(pageFilePath);
-  console.log('the source is', source);
   const { content, data } = matter(source);
   const mdxSource = await serialize(content, {
     mdxOptions: {
